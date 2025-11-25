@@ -6,118 +6,142 @@
 	<title>Filtrar països per continent (BD world.sql)</title>
 	<style>
 		body {
-			font-family: Arial, sans-serif;
+			font-family: 'Segoe UI', Arial, sans-serif;
 			margin: 20px;
-			background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+			background: linear-gradient(120deg, #fff0f6 0%, #f8bbd0 100%);
 		}
 
 		h1 {
-			background: #6a89cc;
+			background: #ec407a;
 			color: #fff;
-			padding: 18px 25px;
-			border-radius: 8px;
-			box-shadow: 0 3px 8px rgba(106, 137, 204, 0.13);
-			margin-bottom: 30px;
-			letter-spacing: 1px;
+			padding: 20px 32px;
+			border-radius: 10px;
+			box-shadow: 0 3px 13px rgba(233, 30, 99, 0.16);
+			margin-bottom: 34px;
+			letter-spacing: 1.2px;
+			font-family: 'Segoe UI', Arial, sans-serif;
+			text-shadow: 1px 2px 12px rgba(233, 30, 99, 0.09);
 		}
 
 		table {
 			width: 100%;
 			border-collapse: collapse;
-			box-shadow: 0 2px 15px rgba(0,0,0,0.07);
-			margin-bottom: 30px;
-			border-radius: 6px;
+			box-shadow: 0 2px 15px rgba(233, 30, 99, 0.11);
+			margin-bottom: 35px;
+			border-radius: 10px;
 			overflow: hidden;
+			background: #fff;
 		}
 		table th, table td {
-			border: 1px solid #b2bec3;
-			padding: 10px 12px;
+			border: 1px solid #f8bbd0;
+			padding: 12px 14px;
 			text-align: left;
+			font-size: 16px;
 		}
 		table th {
-			background: #636e72;
+			background: #f06292;
 			color: #fff;
+			font-weight: bold;
 		}
 		table tr:nth-child(even) {
-			background: #f1f2f6;
+			background: #fce4ec;
 		}
 		table tr:hover {
-			background: #dfe4ea;
+			background: #f8bbd0 !important;
 			transition: background 0.2s;
 		}
 
 		form {
-			margin: 20px 0 25px 0;
-			background: #fff;
-			border-radius: 8px;
-			box-shadow: 0 3px 8px rgba(74, 144, 226, 0.06);
-			padding: 16px 18px;
+			margin: 22px 0 28px 0;
+			background: #fff0f6;
+			border-radius: 12px;
+			box-shadow: 0 3px 13px rgba(233, 30, 99, 0.06);
+			padding: 18px 22px;
 			width: max-content;
+			border: 2px solid #f8bbd0;
 		}
 
 		select {
-			padding: 7px 10px;
+			padding: 9px 13px;
 			width: 240px;
-			margin-right: 10px;
-			border-radius: 6px;
-			border: 1px solid #b2bec3;
-			background: #f7faff;
-			font-size: 16px;
+			margin-right: 12px;
+			border-radius: 8px;
+			border: 1.5px solid #f06292;
+			background: #fce4ec;
+			font-size: 17px;
+			color: #c2185b;
+			transition: border 0.18s;
+		}
+		select:focus {
+			border: 2px solid #ec407a;
+			outline: none;
+			background: #fff5fa;
 		}
 
 		button {
-			padding: 8px 18px;
+			padding: 9px 22px;
 			cursor: pointer;
-			border-radius: 6px;
+			border-radius: 8px;
 			border: none;
-			background: #00b894;
+			background: #e75480;
 			color: #fff;
 			font-weight: bold;
-			letter-spacing: 0.5px;
-			box-shadow: 0 1px 4px rgba(0,184,148,0.08);
+			letter-spacing: 0.6px;
+			box-shadow: 0 1px 6px rgba(236, 64, 122, 0.11);
 			transition: background 0.15s;
+			font-size: 16px;
+			margin-right: 4px;
 		}
 		button[type="submit"]:last-child {
-			background: #0984e3;
+			background: #ad1457;
 		}
 		button:hover {
-			background: #00cec9 !important;
-			color: #fff;
+			background: #d81b60 !important;
+			color: #ffe3ed !important;
 		}
 		button[type="submit"]:last-child:hover {
-			background: #273c75 !important;
+			background: #880e4f !important;
 		}
 
 		.filtros {
 			display: flex;
-			gap: 10px;
+			gap: 13px;
 			align-items: center;
 		}
 
 		.error {
-			color: #d63031;
+			color: #c62828;
 			font-weight: bold;
 			margin: 10px 0 18px 0;
-			padding: 8px 14px;
-			background: #ffe5e5;
-			border: 1px solid #fab1a0;
-			border-radius: 6px;
+			padding: 10px 18px;
+			background: #ffdde4;
+			border: 1.5px solid #f06292;
+			border-radius: 8px;
+		}
+
+		p strong {
+			color: #c2185b;
 		}
 
 		@media (max-width: 600px) {
 			.filtros {
 				flex-direction: column;
 				align-items: stretch;
+				gap: 8px;
 			}
 			form {
 				width: 100%;
 			}
 			table th, table td {
-				padding: 7px 4px;
+				padding: 8px 6px;
 				font-size: 14px;
 			}
 			select {
 				width: 100%;
+			}
+			h1 {
+				font-size: 19px;
+				padding: 10px 12px;
 			}
 		}
 	</style>
@@ -161,7 +185,7 @@
 	<!-- Formulari amb un selector desplegable per al continent -->
 	<form method="POST" action="">
 		<div class="filtros">
-			<label for="continent" style="font-weight:600;">Selecciona un continent:</label>
+			<label for="continent" style="font-weight:600;color:#ad1457;">Selecciona un continent:</label>
 			<select name="continent" id="continent">
 				<option value="">-- Tots els continents --</option>
 				<?php foreach ($continents as $cont): ?>
